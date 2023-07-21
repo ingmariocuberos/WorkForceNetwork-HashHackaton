@@ -1,0 +1,172 @@
+<h1 class="mt-2 ms-2">Paso 1: Pago</h1>
+<hr>
+<form class="container" [formGroup]="pagoForm" (submit)="sendPayInfo()">
+    <div class="row">
+        <div class="col">
+            <label class="form-text">Código TMP</label>
+            <input 
+                type="text" 
+                class="form-control"
+                formControlName="access"
+                >
+            <span class="form-text text-danger"
+                *ngIf="campoEsValido('access')">
+               Este campo es obligatorio
+            </span>
+        </div>
+    </div>
+
+    <div class="row mb-3">
+        <div class="col">
+            <label class="form-text">Tipo de documento</label>
+            <select 
+                class="form-select" 
+                id="tipoIde1" 
+                formControlName="tipoIde1">
+                <option value="" selected>Escoja el tipo de documento:</option>
+                <option value="CC">Cédula de ciudadanía</option>
+                <option value="TI">Tarjeta de identificación</option>
+                <option value="RC">Registro Civil (NUIP)</option>
+            </select>
+            <span class="form-text text-danger"
+                *ngIf="campoEsValido('tipoIde1')">
+                Este campo es obligatorio
+            </span>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col">
+            <label class="form-text">Número de documento</label>
+            <input 
+                type="text" 
+                class="form-control"
+                formControlName="numId"
+                >
+            <span class="form-text text-danger"
+                *ngIf="campoEsValido('numId')">
+               {{ getIdErrors('numId') }}
+            </span>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col">
+            <label class="form-text">Confirme Número de documento</label>
+            <input 
+                type="text" 
+                class="form-control"
+                formControlName="confirmNumId"
+                >
+            <span class="form-text text-danger"
+                *ngIf="campoEsValido('confirmNumId')">
+               {{ getIdErrors('confirmNumId') }}
+            </span>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col">
+            <label class="form-text">Nombres</label>
+            <input 
+                type="text" 
+                class="form-control"
+                formControlName="firstName"
+                >
+            <span class="form-text text-danger"
+                *ngIf="campoEsValido('firstName')">
+               Este campo es obligatorio
+            </span>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col">
+            <label class="form-text">Apellidos</label>
+            <input 
+                type="text" 
+                class="form-control"
+                formControlName="lastName"
+                >
+            <span class="form-text text-danger"
+                *ngIf="campoEsValido('lastName')">
+               Este campo es obligatorio
+            </span>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col">
+            <label class="form-text">Teléfono</label>
+            <input 
+                type="text" 
+                class="form-control"
+                formControlName="mobile"
+                >
+            <span class="form-text text-danger"
+                *ngIf="campoEsValido('mobile')">
+               Este campo es obligatorio
+            </span>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col">
+            <label class="form-text">Email</label>
+            <input 
+                type="text" 
+                class="form-control"
+                formControlName="email"
+                >
+            <span class="form-text text-danger"
+                *ngIf="campoEsValido('email')">
+               {{ getEmailErrors('email') }}
+            </span>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col">
+            <label class="form-text">Confirme el email</label>
+            <input 
+                type="text" 
+                class="form-control"
+                formControlName="confirmEmail"
+                >
+            <span class="form-text text-danger"
+                *ngIf="campoEsValido('confirmEmail')">
+                {{ getEmailErrors('confirmEmail') }}
+            </span>
+        </div>
+    </div>
+
+    <div class="row mb-3">
+        <div class="col">
+            <label class="form-text">Tipo de solicitud</label>
+            <select 
+                class="form-select" 
+                id="tipoIde2" 
+                formControlName="tipoIde2">
+                <option value="" selected>Escoja el tipo de solicitud:</option>
+                <option value="5c5a446a15ab22a64d531d80704d4d88d5928a0a">Pasaporte Ordinario</option>
+                <option value="5c2057a1fa2c9dda93ca29cc1109186d28948490">Pasaporte Ejecutivo</option>
+            </select>
+            <span class="form-text text-danger"
+                *ngIf="campoEsValido('tipoIde2')">
+                Este campo es obligatorio
+            </span>
+        </div>
+    </div>
+    
+    <div class="row">
+        <div class="col d-flex justify-content-around mt-3">
+            <button 
+                class="btn btn-warning ml-2"
+                routerLink="/tramites">Regresar</button>
+            <button 
+                class="btn btn-primary"
+                type="submit">Enviar</button>
+        </div>
+    </div>
+
+</form>

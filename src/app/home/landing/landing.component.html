@@ -1,0 +1,48 @@
+<app-bar-menu></app-bar-menu>
+
+<div class="d-flex justify-content-center align-items-center container-slogan">
+  <div class="col-9">
+    <h2 class="slogan-text mt-2 mr-5 mb-2 ml-5">
+      Seguridad y transparencia en cada contrato: Verificación y registro impecables con IA y blockchain.
+    </h2>
+  </div>
+</div>
+
+<form [formGroup]="docForm" class="drag-drop-container">
+  <div class="drag-drop-file">
+    <label 
+      for="file-upload" 
+      class="file-label"
+      *ngIf="fileAllowed !== 2; else fileCharged">
+      Arrastra y suelta tu archivo aquí o haz clic para seleccionarlo.
+    </label>
+    <input 
+      id="file-upload" 
+      type="file"
+      formControlName="file"
+      class="file-input"
+      (change)="validateFile($event)">
+    <ng-template #fileCharged>
+      <div class="file-uploaded">
+        <i class="file-uploaded-icon fa-solid fa-file-export"></i>
+        <p>{{ this.docForm.controls['file'].value }}</p>
+        <button
+          (click)="deleteFile()">
+          Eliminar
+        </button>
+        <button
+          (click)="uploadFile()">
+          Enviar
+        </button>
+      </div>
+    </ng-template>
+  </div>
+  <span
+    *ngIf="fileAllowed === 0"
+    class="file-upload-error-extension">
+      Las extensiones de archivos aceptadas son: jpg, jpeg, png 
+  </span>
+  <p *ngIf="respuesta">
+    {{ respuesta | json }}
+  </p>
+</form>

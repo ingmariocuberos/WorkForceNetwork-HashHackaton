@@ -1,0 +1,292 @@
+<div>
+  <div class="col-9">
+    <h1 class="mt-2 ms-3">
+      {{
+        simulatorStatus === ""
+          ? "Simulador"
+          : simulatorStatus === "pago"
+          ? "Simulador Paso 1: Pago - Tiempo: " + timer
+          : "Simulador Paso 2: Cita - Tiempo: " + timer
+      }}
+    </h1>
+  </div>
+</div>
+<hr />
+
+<div *ngIf="simulatorStatus === ''">
+  <div
+    class="d-flex justify-content-center align-items-center container-slogan"
+  >
+    <div class="col-9">
+      <h2 class="slogan-text mt-2 mr-5 mb-2 ml-5">
+        Simulador de intento de conseguir del pago y cita
+      </h2>
+      <h3 class="process-hour text-center mt-2">08:00 a.m.</h3>
+    </div>
+  </div>
+  <div
+    class="d-flex flex-wrap md-flex-row p-3 justify-content-center align-items-center"
+  >
+    <div
+      class="btn btn-dark landing-button m-3"
+      (click)="selectSimulatorStatus('pago')"
+    >
+      Simulador Paso 1: Pago
+    </div>
+    <div
+      class="btn btn-primary landing-button m-3"
+      (click)="selectSimulatorStatus('cita')"
+    >
+      Simulador Paso 2: Cita
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col d-flex justify-content-center">
+      <button class="btn btn-warning" routerLink="/tramites">Regresar</button>
+    </div>
+  </div>
+</div>
+
+<div *ngIf="simulatorStatus === 'pago'">
+  <form class="container" [formGroup]="pagoForm" (submit)="sendInfo('pago')">
+    <div class="row">
+      <div class="col">
+        <label class="form-text">Número de documento</label>
+        <input type="text" class="form-control" formControlName="numId" />
+        <span class="form-text text-danger" *ngIf="campoEsValido('pago', 'numId')">
+          {{ getIdErrors("numId") }}
+        </span>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col">
+        <label class="form-text">Confirme Número de documento</label>
+        <input
+          type="text"
+          class="form-control"
+          formControlName="confirmNumId"
+        />
+        <span
+          class="form-text text-danger"
+          *ngIf="campoEsValido('pago', 'confirmNumId')"
+        >
+          {{ getIdErrors("confirmNumId") }}
+        </span>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col">
+        <label class="form-text">Nombres</label>
+        <input type="text" class="form-control" formControlName="firstName" />
+        <span class="form-text text-danger" *ngIf="campoEsValido('pago', 'firstName')">
+          Este campo es obligatorio
+        </span>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col">
+        <label class="form-text">Apellidos</label>
+        <input type="text" class="form-control" formControlName="lastName" />
+        <span class="form-text text-danger" *ngIf="campoEsValido('pago', 'lastName')">
+          Este campo es obligatorio
+        </span>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col">
+        <label class="form-text">Teléfono</label>
+        <input type="text" class="form-control" formControlName="mobile" />
+        <span class="form-text text-danger" *ngIf="campoEsValido('pago', 'mobile')">
+          Este campo es obligatorio
+        </span>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col">
+        <label class="form-text">Email</label>
+        <input type="text" class="form-control" formControlName="email" />
+        <span class="form-text text-danger" *ngIf="campoEsValido('pago', 'email')">
+          {{ getEmailErrors("email") }}
+        </span>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col">
+        <label class="form-text">Confirme el email</label>
+        <input
+          type="text"
+          class="form-control"
+          formControlName="confirmEmail"
+        />
+        <span
+          class="form-text text-danger"
+          *ngIf="campoEsValido('pago', 'confirmEmail')"
+        >
+          {{ getEmailErrors("confirmEmail") }}
+        </span>
+      </div>
+    </div>
+
+    <div class="row mt-2 mb-2">
+        <div class="col form-check d-flex justify-content-center">
+          <input
+            class="form-check-input"
+            type="checkbox"
+            value=""
+            id="check-accept"
+            formControlName="acepto"
+          />
+          <label class="ms-2 form-check-label" for="check-accept">
+            Acepta tratamiento de información
+          </label>
+          <span class="form-text text-danger" *ngIf="campoEsValido('pago', 'acepto')">
+            Este campo es obligatorio
+          </span>
+        </div>
+      </div>
+
+    <div class="row">
+      <div class="col d-flex justify-content-around mt-3">
+        <button
+          class="btn btn-warning ms-2"
+          (click)="selectSimulatorStatus('')"
+        >
+          Regresar
+        </button>
+        <button class="btn btn-primary" type="submit">Enviar</button>
+      </div>
+    </div>
+  </form>
+</div>
+
+<div *ngIf="simulatorStatus === 'cita'">
+  <form class="container" [formGroup]="citaForm" (submit)="sendInfo('cita')">
+    <div class="row">
+      <div class="col">
+        <label class="form-text">Número de documento</label>
+        <input type="text" class="form-control" formControlName="numId" />
+        <span class="form-text text-danger" *ngIf="campoEsValido('cita', 'numId')">
+          Este campo es obligatorio
+        </span>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col d-flex justify-content-center align-items-center mt-3">
+        <mat-form-field appearance="fill" *ngIf="true">
+          <mat-label>Fecha de pago</mat-label>
+          <input
+            formControlName="paymentDay"
+            matInput
+            [matDatepicker]="picker"
+          />
+          <mat-hint>DD/MM/YYYY</mat-hint>
+          <mat-datepicker-toggle
+            matIconSuffix
+            [for]="picker"
+          ></mat-datepicker-toggle>
+          <mat-datepicker #picker></mat-datepicker>
+        </mat-form-field>
+        <span class="form-text text-danger" *ngIf="campoEsValido('cita', 'paymentDay')">
+          Este campo es obligatorio
+        </span>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col">
+        <label class="form-text">Tipo de Solicitud</label>
+        <select
+          class="form-select"
+          id="floatingSelect"
+          formControlName="processType"
+        >
+          <option value="" selected>Escoja el tipo de solicitud:</option>
+          <option value="1">Pasaporte Por Primera Vez</option>
+          <option value="2">Pasaporte Por Renovación</option>
+          <option value="5">Pasaporte Para Niños</option>
+        </select>
+        <span
+          class="form-text text-danger"
+          *ngIf="campoEsValido('cita', 'processType')"
+        >
+          Este campo es obligatorio
+        </span>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col">
+        <label class="form-text">Teléfono</label>
+        <input type="text" class="form-control" formControlName="mobile" />
+        <span class="form-text text-danger" *ngIf="campoEsValido('cita', 'mobile')">
+          Este campo es obligatorio
+        </span>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col">
+        <label class="form-text">Email</label>
+        <input type="text" class="form-control" formControlName="email" />
+        <span class="form-text text-danger" *ngIf="campoEsValido('cita', 'email')">
+          {{ getEmailErrors("email") }}
+        </span>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col">
+        <label class="form-text">Confirme el email</label>
+        <input
+          type="text"
+          class="form-control"
+          formControlName="confirmEmail"
+        />
+        <span
+          class="form-text text-danger"
+          *ngIf="campoEsValido('cita', 'confirmEmail')"
+        >
+          {{ getEmailErrors("confirmEmail") }}
+        </span>
+      </div>
+    </div>
+
+    <div class="row mt-2 mb-2">
+      <div class="col form-check d-flex justify-content-center">
+        <input
+          class="form-check-input"
+          type="checkbox"
+          value=""
+          id="check-accept"
+          formControlName="acepto"
+        />
+        <label class="form-check-label ms-2" for="check-accept">
+          Acepta tratamiento de información
+        </label>
+        <span class="form-text text-danger" *ngIf="campoEsValido('cita', 'acepto')">
+          Este campo es obligatorio
+        </span>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col d-flex justify-content-around mt-3">
+        <button
+          class="btn btn-warning ms-2"
+          (click)="selectSimulatorStatus('')"
+        >
+          Regresar
+        </button>
+        <button class="btn btn-primary" type="submit">Enviar</button>
+      </div>
+    </div>
+  </form>
+</div>

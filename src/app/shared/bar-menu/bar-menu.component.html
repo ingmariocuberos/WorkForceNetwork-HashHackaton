@@ -1,0 +1,27 @@
+<nav class="navbar-custom">
+    <div class="navbar-div-1">
+        <img 
+            src="../../../assets/logo.png" 
+            alt="Logo check" 
+            class="navbar-brand-logo">
+        <span class="navbar-brand-text">Confirm It!</span>
+    </div>
+    <div class="navbar-div-2">
+        <div 
+            class="navbar-item"
+            [routerLink]="['/home']"
+            >
+            Inicio
+        </div>
+        <div 
+            class="navbar-item"
+            [routerLink]="['/home/simulador']">
+            Consulta
+        </div>
+        <div 
+            class="navbar-item"
+            [routerLink]="['/home/pago']">
+            Sobre nosotros
+        </div>
+    </div>
+</nav>

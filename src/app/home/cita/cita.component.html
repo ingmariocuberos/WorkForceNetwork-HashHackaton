@@ -1,0 +1,123 @@
+<h1 class="mt-2 ms-2">Paso 2: Cita</h1>
+<hr>
+<form class="container" [formGroup]="citaForm" (submit)="sendAppoinmentInfo()">
+
+    <div class="row">
+        <div class="col">
+            <label class="form-text">Código TMP</label>
+            <input 
+                type="text" 
+                class="form-control"
+                formControlName="access"
+                >
+            <span class="form-text text-danger"
+                *ngIf="campoEsValido('access')">
+               Este campo es obligatorio
+            </span>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col">
+            <label class="form-text">Número de documento</label>
+            <input 
+                type="text" 
+                class="form-control"
+                formControlName="numId">
+            <span class="form-text text-danger"
+                *ngIf="campoEsValido('numId')">
+               Este campo es obligatorio
+            </span>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col d-flex justify-content-center align-items-center mt-3">
+            <mat-form-field appearance="fill" *ngIf="true">
+                <mat-label>Fecha de pago</mat-label>
+                <input formControlName="paymentDay" matInput [matDatepicker]="picker">
+                <mat-hint>DD/MM/YYYY</mat-hint>
+                <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+                <mat-datepicker #picker></mat-datepicker>
+            </mat-form-field>
+            <span class="form-text text-danger"
+                *ngIf="campoEsValido('paymentDay')">
+               Este campo es obligatorio
+            </span>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col">
+            <label class="form-text">Tipo de Solicitud</label>
+            <select 
+                class="form-select" 
+                id="floatingSelect" 
+                formControlName="processType">
+                <option value="" selected>Escoja el tipo de solicitud:</option>
+                <option value="1">Pasaporte Por Primera Vez</option>
+                <option value="2">Pasaporte Por Renovación</option>
+                <option value="5">Pasaporte Para Niños</option>
+            </select>
+            <span class="form-text text-danger"
+                *ngIf="campoEsValido('processType')">
+                Este campo es obligatorio
+            </span>
+            
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col">
+            <label class="form-text">Teléfono</label>
+            <input 
+                type="text" 
+                class="form-control"
+                formControlName="mobile">
+            <span class="form-text text-danger"
+                *ngIf="campoEsValido('mobile')">
+               Este campo es obligatorio
+            </span>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col">
+            <label class="form-text">Email</label>
+            <input 
+                type="text" 
+                class="form-control"
+                formControlName="email">
+            <span class="form-text text-danger"
+                *ngIf="campoEsValido('email')">
+                {{ getEmailErrors('email') }}
+            </span>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col">
+            <label class="form-text">Confirme el email</label>
+            <input 
+                type="text" 
+                class="form-control"
+                formControlName="confirmEmail">
+            <span class="form-text text-danger"
+                *ngIf="campoEsValido('confirmEmail')">
+               {{ getEmailErrors('confirmEmail') }}
+            </span>
+        </div>
+    </div>
+    
+    <div class="row">
+        <div class="col d-flex justify-content-around mt-3">
+            <button 
+                class="btn btn-warning ml-2"
+                routerLink="/tramites">Regresar</button>
+            <button 
+                class="btn btn-primary"
+                type="submit">Enviar</button>
+        </div>
+    </div>
+
+</form>

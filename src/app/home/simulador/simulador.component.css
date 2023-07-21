@@ -1,0 +1,24 @@
+.main-menu-simulator{
+    box-sizing: border-box;
+}
+
+.landing-button{
+    width: 90vw;
+    max-width: 400px;
+    height: 50px;
+}
+
+.slogan-text{
+    font-size: 35px;
+    text-align: center;
+    font-weight: 900;
+    font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+}
+
+.container-slogan{
+    min-height: 40vh;
+}
+
+.process-hour{
+    font-family: 'Russo One', sans-serif;
+}

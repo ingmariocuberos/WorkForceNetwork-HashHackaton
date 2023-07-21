@@ -1,0 +1,12 @@
+body {
+    height: 100vh;
+    width: 100vw;
+    overflow-y: scroll;
+    overflow-x: hidden;
+}
+html, body { height: 100%; }
+body { margin: 0; font-family: 'Russo One', sans-serif;}
+
+.btn{
+    font-size: larger;
+}
