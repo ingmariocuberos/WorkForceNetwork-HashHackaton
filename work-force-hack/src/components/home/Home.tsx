@@ -1,15 +1,16 @@
 import styled from "styled-components";
 import { useState } from "react";
 import Button from "../button/Button";
+import Typewriter from "typewriter-effect";
 
 interface MenuProps {
-    click: boolean
-  }
+  click: boolean;
+}
 
 const Section = styled.section`
   width: 100vw;
   background-color: ${(props) => props.theme.body};
-`
+`;
 
 const NavBar = styled.nav`
   display: flex;
@@ -29,7 +30,7 @@ const NavBar = styled.nav`
       display: inline-block;
     }
   }
-`
+`;
 
 const Menu = styled.ul<MenuProps>`
   display: flex;
@@ -57,7 +58,7 @@ const Menu = styled.ul<MenuProps>`
     justify-content: center;
     touch-action: none;
   }
-`
+`;
 
 const MenuItem = styled.li`
   margin: 0 1rem;
@@ -80,7 +81,7 @@ const MenuItem = styled.li`
       display: none;
     }
   }
-`
+`;
 
 const HamburgerMenu = styled.span<MenuProps>`
   width: ${(props) => (props.click ? "2rem" : "1.5rem")};
@@ -120,7 +121,7 @@ const HamburgerMenu = styled.span<MenuProps>`
     bottom: ${(props) => (props.click ? "0.3rem" : "0.5rem")};
     transform: ${(props) => (props.click ? "rotate(40deg)" : "rotate(0)")};
   }
-`
+`;
 
 export const Home = () => {
   const [click, setClick] = useState(false);
@@ -132,7 +133,7 @@ export const Home = () => {
       inline: "nearest",
     });
     setClick(!click);
-  }
+  };
 
   return (
     <Section id="navegation">
@@ -154,6 +155,23 @@ export const Home = () => {
           <Button text="Connect Wallet" link="https://google.com" />
         </div>
       </NavBar>
+      <header style={{margin: "0 2rem"}}>
+        <div style={{display: "flex", height: "90vh", alignItems: "center", justifyContent: "center", textAlign: "center"}}>
+          <Typewriter
+            options={{
+              deleteSpeed: 0,
+              delay: 0,
+            }}
+            onInit={(typewriter) => {
+              typewriter
+                .typeString(
+                  "New way to hire freelancers and contractors. We use blockchain technology to create a secure and transparent way to hold funds in escrow until a project is completed. This eliminates the risk of fraud or theft, giving both freelancers and employers peace of mind."
+                )
+                .start()
+            }}
+          />
+        </div>
+      </header>
     </Section>
-  )
-}
+  );
+};
